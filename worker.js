@@ -9,7 +9,7 @@ odeskify = new Odeskify(config);
 
 new cronJob('* 0,10,20,30,40,50 * * * *', function(){
     odeskify.getFirst(function(data){
-        if(lastJobID !== data.id) {
+        if(lastJobID !== data.id && data.client.payment_verification_status === "VERIFIED") {
             request({
                 url: config.webhook_url,
                 method: "POST",
